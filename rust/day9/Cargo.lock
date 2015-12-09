@@ -1,0 +1,12 @@
+[root]
+name = "day9"
+version = "0.1.0"
+dependencies = [
+ "permutohedron 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "permutohedron"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
