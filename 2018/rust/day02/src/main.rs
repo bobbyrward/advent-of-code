@@ -42,35 +42,20 @@ fn score_word(word: &str) -> WordCounts {
 }
 
 fn part_one(words: &Vec<String>) -> u32 {
-    let mut pair_count = 0;
-    let mut triplet_count = 0;
-
-    for score in words.iter().map(|x| score_word(x)) {
-        match score {
-            WordCounts {
-                has_pair: true,
-                has_triplet: true,
-            } => {
-                pair_count += 1;
-                triplet_count += 1;
-            }
-            WordCounts {
-                has_pair: true,
-                has_triplet: false,
-            } => {
+    let score = words.iter().map(|x| score_word(x)).fold(
+        (0, 0),
+        |(mut pair_count, mut triplet_count), counts| {
+            if counts.has_pair {
                 pair_count += 1;
             }
-            WordCounts {
-                has_pair: false,
-                has_triplet: true,
-            } => {
+            if counts.has_triplet {
                 triplet_count += 1;
             }
-            _ => (),
-        };
-    }
+            (pair_count, triplet_count)
+        },
+    );
 
-    return pair_count * triplet_count;
+    return score.0 * score.1;
 }
 
 fn differs_by_one_char(word_a: &str, word_b: &str) -> bool {
