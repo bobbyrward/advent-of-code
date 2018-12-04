@@ -1,18 +1,19 @@
 use std::collections::HashSet;
-use std::io::stdin;
 use std::io::prelude::*;
-
+use std::io::stdin;
 
 fn part_one(deltas: &Vec<i32>) -> i32 {
     deltas.iter().sum()
 }
 
-
 fn part_two(deltas: &Vec<i32>) -> i32 {
     let mut frequencies = HashSet::new();
 
     // This should probably stop at cycle but...
-    for freq in deltas.iter().cycle().scan(0, |acc, &x| { *acc += x; Some(*acc) }) {
+    for freq in deltas.iter().cycle().scan(0, |acc, &x| {
+        *acc += x;
+        Some(*acc)
+    }) {
         if !frequencies.insert(freq) {
             return freq;
         }
@@ -20,7 +21,6 @@ fn part_two(deltas: &Vec<i32>) -> i32 {
 
     0
 }
-
 
 fn main() {
     let deltas: Vec<i32> = stdin()
